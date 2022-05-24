@@ -2,7 +2,7 @@
 from odoo import models, fields, _, api
 from odoo.exceptions import UserError
 
-from odoo.exceptions import  ValidationError
+from odoo.exceptions import ValidationError
 
 
 class ProjectTaskType(models.Model):
@@ -37,7 +37,10 @@ class ProjectTaskType(models.Model):
         """
         for record in self:
             if record.task_mail_rule_ids:
-                raise UserError(_('There are e-mail reminder rules configured for this stage. Please remove them or change them so they belong to another stage first.'))
+                raise UserError(
+                    _('There are e-mail reminder rules configured for this stage. '
+                      'Please remove them or change them so they belong to another stage first.')
+                )
         super(ProjectTaskType, self).unlink()
 
     @api.constrains('project_ids')
@@ -48,4 +51,7 @@ class ProjectTaskType(models.Model):
         for stage in self:
             for rule in stage.task_mail_rule_ids:
                 if rule.project_id not in stage.project_ids:
-                    raise ValidationError(_('The rule %s is still linked to project %s, while the project is no longer configured for this stage.') % (rule.name, rule.project_id.name))
+                    raise ValidationError(
+                        _('The rule %s is still linked to project %s, while the project is no longer configured for this stage.')
+                        % (rule.name, rule.project_id.name)
+                    )
