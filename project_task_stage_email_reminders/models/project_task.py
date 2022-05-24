@@ -13,7 +13,7 @@ class ProjectTask(models.Model):
         Then send out the reminder if it is the correct day.
         """
         stages_with_reminder = self.env['project.task.type'].search([
-            ('lead_mail_rule_ids', '!=', False)
+            ('task_mail_rule_ids', '!=', False)
         ])
 
         tasks = self.env['project.task'].search([('stage_id', 'in', stages_with_reminder.ids)])
