@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="task_mail_rule_view_form" model="ir.ui.view">
+        <field name="name">task.mail.rule.form</field>
+        <field name="model">task.mail.rule</field>
+        <field name="arch" type="xml">
+            <form string="task Mail Rule">
+                <sheet>
+                    <group>
+                        <field name="project_id" invisible="1"/>
+                        <field name="stage_id"/>
+                        <field name="email_template_id"/>
+                        <field name="name"/>
+                        <field name="send_reminder_after"/>
+                        <field name="active" widget="boolean_toggle"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="task_mail_rule_view_tree" model="ir.ui.view">
+        <field name="name">task.mail.rule.tree</field>
+        <field name="model">task.mail.rule</field>
+        <field name="arch" type="xml">
+            <tree string="Task Mail Rules" editable="bottom">
+                <field name="project_id" invisible="1"/>
+                <field name="stage_id"/>
+                <field name="email_template_id"/>
+                <field name="name"/>
+                <field name="send_reminder_after"/>
+                <field name="active" widget="boolean_toggle"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="task_type_edit_inherit" model="ir.ui.view">
+        <field name="name">project.task.type.form</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_edit"/>
+        <field name="arch" type="xml">
+            <group position="after">
+                <group name="automatic_reminders" string="Automatic reminders"
+                       attrs="{'invisible': [('project_ids', '=', [])]}"
+                       groups="project.group_project_manager">
+                    <field name="default_project_id" invisible="1"/>
+                    <field name="task_mail_rule_ids"
+                           context="{'default_project_id': default_project_id}">
+                        <tree editable="bottom">
+                            <field name="stage_id" invisible="1"/>
+                            <field name="project_id"
+                                   domain="[('id', 'in', parent.project_ids)]"
+                                   options="{'no_create_edit': True, 'no_create': True}"/>
+                            <field name="email_template_id"/>
+                            <field name="name"/>
+                            <field name="send_reminder_after" width="200px"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </tree>
+                    </field>
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
