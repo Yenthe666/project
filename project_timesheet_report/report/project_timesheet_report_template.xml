@@ -1,0 +1,7 @@
+<odoo>
+	<data>
+		<template id="timesheet_report_template">
+	        <t t-call="hr_timesheet.report_timesheet"/>
+	    </template>
+	</data>
+</odoo>
