@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="task_type_edit_inherit_project_stage_warning" model="ir.ui.view">
+        <field name="name">project.task.type.form.inherit.stage.warning</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_edit"/>
+        <field name="arch" type="xml">
+            <field name="is_closed" position="after">
+                <field name="show_warning_when_stage_skipped"/>
+            </field>
+        </field>
+    </record>
+</odoo>
