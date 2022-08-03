@@ -8,11 +8,11 @@ class ProjectTask(models.Model):
 
     def write(self, values):
         if values.get('stage_id'):
-            new_stage = self.env['project.task.type'].browse(values.get('stage_id'))
+            new_stage = self.env['project.task.type'].sudo().browse(values.get('stage_id'))
             end_sequence = new_stage.sequence
             for task in self:
                 start_sequence = task.stage_id.sequence
-                skipped_stage = self.env['project.task.type'].search([
+                skipped_stage = self.env['project.task.type'].sudo().search([
                     ('sequence', '<', end_sequence),
                     ('sequence', '>', start_sequence),
                     ('project_ids', '=', task.project_id.id),
