@@ -15,7 +15,7 @@ class ProjectTask(models.Model):
                 skipped_stage = self.env['project.task.type'].sudo().search([
                     ('sequence', '<', end_sequence),
                     ('sequence', '>', start_sequence),
-                    ('project_ids', '=', task.project_id.id),
+                    ('project_ids', '=', values.get('project_id', task.project_id.id)),
                     ('show_warning_when_stage_skipped', '=', True)
                 ], limit=1)
                 if skipped_stage:
