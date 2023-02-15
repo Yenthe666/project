@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="project.task_type_edit"/>
         <field name="arch" type="xml">
             <field name="project_ids" position="after">
-                <field name="mfm_project_stage_id"/>
+                <field name="project_stage_id"/>
             </field>
         </field>
     </record>
