@@ -14,4 +14,4 @@ class ProjectTask(models.Model):
             if stage_id.mfm_project_stage_id:
                 project = task.project_id
                 if not any(task.stage_id != stage_id for task in project.task_ids):
-                    project.stage_id = stage_id.mfm_project_stage_id.id
+                    project.sudo().stage_id = stage_id.mfm_project_stage_id.id
