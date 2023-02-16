@@ -4,8 +4,7 @@ from odoo import api, models
 class ProjectTask(models.Model):
     _inherit = "project.task"
 
-    @api.constrains("stage_id")
-    def _update_project_state(self):
+    def write(self, vals):
         """
             Update the project stage if all tasks are moved outside of a specific stage.
             For example: Project "A" has the project stages "Backlog", "In progress", "Done"
@@ -16,9 +15,12 @@ class ProjectTask(models.Model):
             automatically update the project it's stage.
             This makes the project stage management easier to automate.
         """
-        for task in self:
-            stage_id = task.stage_id
-            if stage_id.project_stage_id:
-                project = task.project_id
-                if not any(task.stage_id != stage_id for task in project.task_ids):
-                    project.sudo().stage_id = stage_id.project_stage_id.id
+        if vals.get("stage_id"):
+            for task in self:
+                stage_id = task.stage_id
+                if stage_id.project_stage_id:
+                    project = task.project_id
+                    # Use field 'tasks' instead of 'task_ids'
+                    if len(project.tasks.filtered(lambda t: t.stage_id == task.stage_id)) == 1:
+                        project.sudo().stage_id = stage_id.project_stage_id.id
+        return super(ProjectTask, self).write(vals)
