@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-15 13:57+0000\n"
-"PO-Revision-Date: 2023-02-15 13:57+0000\n"
+"POT-Creation-Date: 2023-02-24 10:27+0000\n"
+"PO-Revision-Date: 2023-02-24 10:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,26 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: project_stage_update
+#: model:ir.model.fields,field_description:project_stage_update.field_project_task_type__is_finished
+msgid "Final stage of a task"
+msgstr "Finale fase van een taak"
+
+#. module: project_stage_update
+#: model:ir.model.fields,help:project_stage_update.field_project_task_type__is_finished
+msgid ""
+"If this boolean is checked on we will exclude tasks in this stage as those "
+"tasks are finished."
+msgstr "Indien deze boolean is aangevinkt negeren we taken die zich in deze fase bevinden "
+"aangezien deze taken al voltooid zijn."
+
+#. module: project_stage_update
 #: model:ir.model.fields,field_description:project_stage_update.field_project_task_type__project_stage_id
 msgid "Move project stage to"
+msgstr "Projectfase"
+
+#. module: project_stage_update
+#: model:ir.model.fields,field_description:project_stage_update.field_project_task__project_stage_id
+msgid "Project stage"
 msgstr "Projectfase"
 
 #. module: project_stage_update
@@ -35,5 +53,7 @@ msgstr "Taakfase"
 msgid ""
 "The project stage that you configure here will define to which project stage"
 " the project will move when the last task is moved out of this stage."
-msgstr "De projectfase die u hier configureert zal bepalen naar welke projectfase "
-"het project zich moet verplaatsen als de laatste taak uit deze fase van taken gehaald wordt."
+msgstr ""
+"De projectfase die u hier configureert zal bepalen naar welke projectfase "
+"het project zich moet verplaatsen als de laatste taak uit deze fase van "
+"taken gehaald wordt."

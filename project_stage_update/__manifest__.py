@@ -9,6 +9,7 @@
     'depends': ['project'],
     'data': [
         'views/project_task_type_views.xml',
+        'views/project_task_view.xml',
     ],
     'installable': True,
     'application': True,

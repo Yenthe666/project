@@ -1,8 +1,13 @@
-from odoo import api, models
+from odoo import api, fields, models
 
 
 class ProjectTask(models.Model):
     _inherit = "project.task"
+
+    project_stage_id = fields.Many2one(
+        'project.project.stage',
+        string='Project stage'
+    )
 
     def write(self, vals):
         """
@@ -15,12 +20,13 @@ class ProjectTask(models.Model):
             automatically update the project it's stage.
             This makes the project stage management easier to automate.
         """
-        if vals.get("stage_id"):
-            for task in self:
-                stage_id = task.stage_id
-                if stage_id.project_stage_id:
-                    project = task.project_id
-                    # Use field 'tasks' instead of 'task_ids'
-                    if len(project.tasks.filtered(lambda t: t.stage_id == task.stage_id)) == 1:
-                        project.sudo().stage_id = stage_id.project_stage_id.id
+        if self.project_stage_id:
+            open_tasks = self.sudo().search_count([
+                ('stage_id.is_finished', '=', False),
+                ('project_id', '=', self.project_id.id),
+                ('project_stage_id', '=', self.project_stage_id.id),
+            ])
+            if open_tasks <= 0:
+                self.project_id.stage_id = self.project_stage_id.id
+
         return super(ProjectTask, self).write(vals)
