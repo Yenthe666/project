@@ -27,6 +27,9 @@ class ProjectTask(models.Model):
                 ('project_stage_id', '=', self.project_stage_id.id),
             ])
             if open_tasks <= 0:
-                self.project_id.stage_id = self.project_stage_id.id
+                self._update_project_stage()
 
         return super(ProjectTask, self).write(vals)
+
+    def _update_project_stage(self):
+        self.project_id.stage_id = self.project_stage_id.id
