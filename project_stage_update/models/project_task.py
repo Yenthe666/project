@@ -20,15 +20,13 @@ class ProjectTask(models.Model):
             automatically update the project it's stage.
             This makes the project stage management easier to automate.
         """
-        if self.project_stage_id:
-            open_tasks = self.sudo().search_count([
+        for task in self:
+            if task.project_stage_id and not self.sudo().search_count([
                 ('stage_id.is_finished', '=', False),
-                ('project_id', '=', self.project_id.id),
-                ('project_stage_id', '=', self.project_stage_id.id),
-            ])
-            if open_tasks <= 0:
-                self._update_project_stage()
-
+                ('project_id', '=', task.project_id.id),
+                ('project_stage_id', '=', task.project_stage_id.id),
+            ]):
+                task._update_project_stage()
         return super(ProjectTask, self).write(vals)
 
     def _update_project_stage(self):
